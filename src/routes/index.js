@@ -27,6 +27,8 @@ router.get('/', (req, res) => {
      *
      * @functionality The endpoint should render a view that shows a little description of the app and the different routes available.
      */
+
+    res.render('index', { title: 'Express' });
 });
 
 export default router;

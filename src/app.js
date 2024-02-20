@@ -24,8 +24,8 @@ app.use(addcaloriesRouter);
 app.use(reportRouter);
 
 // view engine setup
-app.set('views', './views');
 app.set('view engine', 'pug');
+app.set('views', './src/views');
 
 // set the port
 const PORT = process.env.PORT || 3000;

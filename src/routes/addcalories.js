@@ -1,41 +1,58 @@
 /**
  * @fileoverview This file contains the route for the endpoint /addcalories.
  *
- * @author Maor Bezalel 325214443
- * @author <firstname> <lastname> <id> @todo add your info Itzik (delete the todo after adding the info)
+ * @author Maor Bezalel
+ * @author @todo add your info Itzik (delete the todo after adding the info)
  */
 
 import { Router } from 'express';
+import { checkSchema, matchedData } from 'express-validator';
+import { handleValidationErrorsMiddleware, checkIfUserExistsMiddleware } from '../middlewares/index.js';
+import { addNewCalorieConsumptionValidationSchema } from '../validation-schemas/addNewCalorieConsumptionValidationSchema.js';
+import { CalorieConsumption } from '../models/index.js';
 
 const router = Router();
 
-router.post('/addcalories', (req, res) => {
-    /**
-     * @todo Add the necessary code to handle the POST endpoint /addcalories (instructions are below).
-     * @todo Create validation schemas for the request body parameters (use the `express-validator` package).
-     * @todo Create a model for the calorie consumption item for the MongoDB database (use the `mongoose` package).
-     * @todo Create/Use pug files to render the appropriate view for the request based on its result (e.g., if the item is added successfully, render a success view; if the item is not added, render an error view). It main serves as a feedback to users that make requests to the server directly from the browser.
-     *
-     * @instructions
-     *
-     *      |
-     *      |
-     *      V
-     *
-     * @method POST
-     * @description this endpoint is used to add a new calorie consumption item.
-     *
-     * BODY PARAMETERS received in the request:
-     * @param user_id - The ID of the user for whom the calorie consumption item is being added.
-     * @param year - The year of the calorie consumption item.
-     * @param month - The month of the calorie consumption item.
-     * @param day - The day of the calorie consumption item.
-     * @param description - Description of the calorie consumption item.
-     * @param category - Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
-     * @param amount - Amount of calories consumed.
-     *
-     * @functionality The endpoint should receive the parameters mentioned above and add a new calorie consumption item to the MongoDB database. The ID of the item will be generated on the server side.
-     */
-});
+/**
+ * @api {post} /addcalories Add Calories
+ * @apiName AddCalories
+ * @apiGroup Calories
+ * @apiDescription This endpoint is used to add a new calorie consumption item to the database for an existing user.
+ *
+ * @apiBody {Number} user_id The ID of the user for whom the calorie consumption item is being added.
+ * @apiBody {Number} year The year of the calorie consumption item.
+ * @apiBody {Number} month The month of the calorie consumption item.
+ * @apiBody {Number} day The day of the calorie consumption item.
+ * @apiBody {String} description Description of the calorie consumption item.
+ * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
+ *
+ * @apiSuccess (201) {String} CaloriesAdded Calories added successfully for user with ID: {user_id}!
+ *
+ * @apiError (400) {Object[]} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
+ * @apiUse ErrorValidationExample
+ * @apiError (404) {String} UserNotFound User with the provided {user_id} does not exist; therefore, calories cannot be added.
+ * @apiError (500) {String} InternalServerError The server encountered an internal error while trying to add calories for the user to the database.
+ */
+router.post(
+    '/addcalories',
+    checkSchema(addNewCalorieConsumptionValidationSchema),
+    handleValidationErrorsMiddleware,
+    checkIfUserExistsMiddleware(true),
+    async (req, res) => {
+        // get the validated data from the request
+        const data = matchedData(req);
+
+        // create a new calorie consumption item
+        const newCalorieConsumption = new CalorieConsumption(data);
+
+        // save the new calorie consumption item to the database
+        try {
+            await newCalorieConsumption.save();
+            res.status(201).send(`Calories added successfully for user with ID: ${data.user_id}!`);
+        } catch (error) {
+            res.status(500).send(`Error while trying to add calories: ${error.message}`);
+        }
+    }
+);
 
 export default router;

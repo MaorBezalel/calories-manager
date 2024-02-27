@@ -14,6 +14,9 @@ import mongoose from 'mongoose';
 // import dotenv for environment variables
 import 'dotenv/config';
 
+// import middlewares
+import { loggingMiddleware } from './middlewares/index.js';
+
 // import routes (endpoints)
 import indexRouter from './routes/index.js';
 import aboutRouter from './routes/about.js';
@@ -25,18 +28,19 @@ const app = express();
 
 // connect to the database using mongoose
 mongoose
-    .connect(process.env.MONGODB_URI)
+    .connect(process.env.MONGODB_URI, { dbName: process.env.MONGODB_DB_NAME })
     .then(() => console.log('MongoDB Connected...'))
     .catch((err) => console.log(err));
+
+// use middlewares
+app.use(express.json()); // for parsing application/json
+app.use(loggingMiddleware);
 
 // use routes
 app.use(indexRouter);
 app.use(aboutRouter);
 app.use(addcaloriesRouter);
 app.use(reportRouter);
-
-// use express middlewares
-app.use(express.json()); // for parsing application/json
 
 // view engine setup
 app.set('view engine', 'pug');

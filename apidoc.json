@@ -1,0 +1,9 @@
+{
+    "name": "Calories Manager API - Docs",
+    "version": "1.0.0",
+    "description": "RESTful API for a simple calories manager",
+    "title": "Calories Manager API - Docs",
+    "template": {
+        "showRequiredLabels": true
+    }
+}

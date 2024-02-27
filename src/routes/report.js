@@ -1,8 +1,8 @@
 /**
  * @fileoverview This file contains the route for the endpoint /report.
  *
- * @author Maor Bezalel 325214443
- * @author <firstname> <lastname> <id> @todo add your info Itzik (delete the todo after adding the info)
+ * @author Maor Bezalel
+ * @author @todo add your info Itzik (delete the todo after adding the info)
  */
 
 import { Router } from 'express';

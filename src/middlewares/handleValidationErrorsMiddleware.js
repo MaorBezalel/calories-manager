@@ -4,15 +4,19 @@
  * @author Maor Bezalel
  */
 
-import { validationResult } from 'express-validator';
+import { validationResult, matchedData } from 'express-validator';
 
 /**
- * A middleware that sends a json error response when validation errors occur.
- * It uses the `validationResult` function from the `express-validator` package to get the errors (if any) from the request.
+ * A middleware that sends a json error response when validation errors occur; otherwise, it attaches
+ * the validated data to the locals object of the response object to be used by the next middleware.
  *
  * @param {import('express').Request} req - The request object.
  * @param {import('express').Response} res - The response object.
  * @param {import('express').NextFunction} next - The next function.
+ *
+ * @remarks
+ * - The validated data is attached to `res.locals.validatedData`.
+ * - This middleware should be used after the express-validator's [checkSchema](https://express-validator.github.io/docs/api/check-schema/#checkschema) middleware to be able to get the validation results from [validationResult](https://express-validator.github.io/docs/api/validation-result/#validationresult) and the validated data from [matchedData](https://express-validator.github.io/docs/api/matched-data/#matcheddata).
  */
 export const handleValidationErrorsMiddleware = (req, res, next) => {
     // get the validation errors from the request
@@ -20,6 +24,10 @@ export const handleValidationErrorsMiddleware = (req, res, next) => {
 
     // if there are no errors, call the next middleware
     if (errors.isEmpty()) {
+        // get the validated data from the request and attach it to the locals object of the response object
+        res.locals.validatedData = matchedData(req);
+
+        // finish and call the next middleware
         return next();
     }
 

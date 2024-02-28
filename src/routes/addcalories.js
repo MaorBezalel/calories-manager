@@ -6,9 +6,9 @@
  */
 
 import { Router } from 'express';
-import { checkSchema, matchedData } from 'express-validator';
+import { checkSchema } from 'express-validator';
 import { handleValidationErrorsMiddleware, checkIfUserExistsMiddleware } from '../middlewares/index.js';
-import { addNewCalorieConsumptionValidationSchema } from '../validation-schemas/addNewCalorieConsumptionValidationSchema.js';
+import { addNewCalorieConsumptionValidationSchema } from '../validation-schemas/index.js';
 import { CalorieConsumption } from '../models/index.js';
 
 const router = Router();
@@ -20,15 +20,15 @@ const router = Router();
  * @apiDescription This endpoint is used to add a new calorie consumption item to the database for an existing user.
  *
  * @apiBody {Number} user_id The ID of the user for whom the calorie consumption item is being added.
- * @apiBody {Number} year The year of the calorie consumption item.
- * @apiBody {Number} month The month of the calorie consumption item.
- * @apiBody {Number} day The day of the calorie consumption item.
+ * @apiBody {Number} year The year when the calorie consumption item occurred.
+ * @apiBody {Number} month The month when the calorie consumption item occurred.
+ * @apiBody {Number} day The day when the calorie consumption item occurred.
  * @apiBody {String} description Description of the calorie consumption item.
  * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
  *
  * @apiSuccess (201) {String} CaloriesAdded Calories added successfully for user with ID: {user_id}!
  *
- * @apiError (400) {Object[]} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
+ * @apiError (400) {Object} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
  * @apiUse ErrorValidationExample
  * @apiError (404) {String} UserNotFound User with the provided {user_id} does not exist; therefore, calories cannot be added.
  * @apiError (500) {String} InternalServerError The server encountered an internal error while trying to add calories for the user to the database.
@@ -39,8 +39,8 @@ router.post(
     handleValidationErrorsMiddleware,
     checkIfUserExistsMiddleware(true),
     async (req, res) => {
-        // get the validated data from the request
-        const data = matchedData(req);
+        // get the validated data from the local object of the response object (attached by the `handleValidationErrorsMiddleware`)
+        const data = res.locals.validatedData;
 
         // create a new calorie consumption item
         const newCalorieConsumption = new CalorieConsumption(data);

@@ -41,6 +41,7 @@ app.use(indexRouter);
 app.use(aboutRouter);
 app.use(addcaloriesRouter);
 app.use(reportRouter);
+app.use('/docs', express.static('docs')); // serve the docs folder as static files
 
 // view engine setup
 app.set('view engine', 'pug');

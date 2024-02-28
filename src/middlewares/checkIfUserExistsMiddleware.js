@@ -11,7 +11,7 @@ import { User } from '../models/index.js';
 /**
  * A wrapped middleware that checks if a user exists in the database and responds accordingly.
  *
- * @param {shouldExists} boolean - A flag that indicates if the user should exist or not. If true, the middleware will respond with an error if the user does not exist. If false, the middleware will respond with an error if the user does exist.
+ * @param {Boolean} shouldExists - A flag that indicates if the user should exist or not. If true, the middleware will respond with an error if the user does not exist. If false, the middleware will respond with an error if the user does exist.
  * @return {import('express').RequestHandler} - A middleware.
  *
  * @remarks Should only be used after the request body has been validated.

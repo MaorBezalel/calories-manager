@@ -33,7 +33,7 @@ export const handleValidationErrorsMiddleware = (req, res, next) => {
 
     // if there are any errors, we:
 
-    // 1. Format the errors to be more readable
+    // 1. Format the errors for the client
     const formatedErrors = errors.formatWith(({ location, path, value, msg, nestedErrors }) => ({
         location,
         param: path,
@@ -43,8 +43,9 @@ export const handleValidationErrorsMiddleware = (req, res, next) => {
     }));
 
     // 2. Send a json response with the errors
+    // only the first error is sent for each parameter (to avoid confusing the client with too many errors)
     res.status(400).json({
-        errors: formatedErrors.array({ onlyFirstError: true }), // only the first error is sent for each parameter (to avoid confusing the client with too many errors)
+        errors: formatedErrors.array({ onlyFirstError: true }),
     });
 };
 

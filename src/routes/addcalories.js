@@ -20,9 +20,9 @@ const router = Router();
  * @apiDescription This endpoint is used to add a new calorie consumption item to the database for an existing user.
  *
  * @apiBody {Number} user_id The ID of the user for whom the calorie consumption item is being added.
- * @apiBody {Number} year The year of the calorie consumption item.
- * @apiBody {Number} month The month of the calorie consumption item.
- * @apiBody {Number} day The day of the calorie consumption item.
+ * @apiBody {Number} year The year when the calorie consumption item occurred.
+ * @apiBody {Number} month The month when the calorie consumption item occurred.
+ * @apiBody {Number} day The day when the calorie consumption item occurred.
  * @apiBody {String} description Description of the calorie consumption item.
  * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
  *

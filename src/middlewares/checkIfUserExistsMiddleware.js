@@ -24,9 +24,9 @@ export const checkIfUserExistsMiddleware = (shouldExists) => async (req, res, ne
     const userExists = !!(await User.findOne({ id: data.user_id }));
 
     if (shouldExists && !userExists) {
-        return res.status(404).send(`User with id ${data.user_id} does not exist.`);
+        return res.status(404).send({ message: `User with id ${data.user_id} does not exist.` });
     } else if (!shouldExists && userExists) {
-        return res.status(409).send(`User with id ${data.user_id} already exists.`);
+        return res.status(409).send({ message: `User with id ${data.user_id} already exists.` });
     } else {
         next();
     }

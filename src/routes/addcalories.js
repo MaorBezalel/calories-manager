@@ -26,12 +26,12 @@ const router = Router();
  * @apiBody {String} description Description of the calorie consumption item.
  * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
  *
- * @apiSuccess (201) {String} CaloriesAdded Calories added successfully for user with ID: {user_id}!
+ * @apiSuccess (201) {Object} CaloriesAdded Calories added successfully for user with ID: {user_id}!
  *
  * @apiError (400) {Object} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
  * @apiUse ErrorValidationExample
- * @apiError (404) {String} UserNotFound User with the provided {user_id} does not exist; therefore, calories cannot be added.
- * @apiError (500) {String} InternalServerError The server encountered an internal error while trying to add calories for the user to the database.
+ * @apiError (404) {Object} UserNotFound User with the provided {user_id} does not exist; therefore, calories cannot be added.
+ * @apiError (500) {Object} InternalServerError The server encountered an internal error while trying to add calories for the user to the database.
  */
 router.post(
     '/addcalories',
@@ -48,9 +48,11 @@ router.post(
         // save the new calorie consumption item to the database
         try {
             await newCalorieConsumption.save();
-            res.status(201).send(`Calories added successfully for user with ID: ${data.user_id}!`);
+            res.status(201).send({ message: `Calories added successfully for user with ID: ${data.user_id}!` });
         } catch (error) {
-            res.status(500).send(`Error while trying to add calories: ${error.message}`);
+            res.status(500).send({
+                message: `Error while trying to add calories for the user to the database: ${error.message}`,
+            });
         }
     }
 );

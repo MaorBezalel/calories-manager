@@ -18,8 +18,8 @@ const router = Router();
  *
  * @apiSuccess (200) {Object[]} Developers An array of objects describing each developer involved in the project.
  *
- * @apiError (404) {String} NotFound No developers found.
- * @apiError (500) {String} InternalServerError The server encountered an internal error while trying to get the developers.
+ * @apiError (404) {Object} NotFound No developers found.
+ * @apiError (500) {Object} InternalServerError The server encountered an internal error while trying to get the developers.
  */
 router.get('/about', async (req, res) => {
     try {
@@ -35,7 +35,7 @@ router.get('/about', async (req, res) => {
         }
     } catch (error) {
         // if an error occurred while fetching the developers - return 500 with an error message
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: `Error while trying to get developers: ${error.message}` });
     }
 });
 

@@ -53,7 +53,7 @@ export const fetchAndGenaerateReportMiddleware = async (req, res, next) => {
         // call the next middleware
         next();
     } catch (error) {
-        res.status(500).send(`Error while trying to get report: ${error.message}`);
+        res.status(500).send({ message: `Error while trying to get report: ${error.message}` });
     }
 };
 

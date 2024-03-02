@@ -23,13 +23,18 @@ const router = Router();
  */
 router.get('/about', async (req, res) => {
     try {
+        // get all developers from the database
         const developers = await Developer.find({}, { _id: 0, __v: 0 });
+
         if (!developers) {
+            // if no developers were found - return 404 with a message
             res.status(404).json({ message: 'No developers found' });
         } else {
+            // if developers were found - return 200 with the developers data as a JSON array response
             res.status(200).json(developers);
         }
     } catch (error) {
+        // if an error occurred while fetching the developers - return 500 with an error message
         res.status(500).json({ message: error.message });
     }
 });

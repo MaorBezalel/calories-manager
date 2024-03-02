@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "RESTful API for a simple calories manager",
     "title": "Calories Manager API - Docs",
-    "order": ["General", "Calories"],
+    "order": ["General", "Home", "About", "Calories", "Add Calories", "Report"],
     "template": {
         "showRequiredLabels": true
     }

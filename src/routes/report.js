@@ -31,8 +31,8 @@ const router = Router();
  *
  * @apiError (400) {Object} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
  * @apiUse ErrorValidationExample
- * @apiError (404) {String} UserNotFound User with the provided {user_id} does not exist; therefore, a report cannot be generated.
- * @apiError (500) {String} InternalServerError The server encountered an internal error while trying to generate the report for the user.
+ * @apiError (404) {Object} UserNotFound User with the provided {user_id} does not exist; therefore, a report cannot be generated.
+ * @apiError (500) {Object} InternalServerError The server encountered an internal error while trying to generate the report for the user.
  */
 router.get(
     '/report',

@@ -2,7 +2,7 @@
  * @fileoverview This file contains the middleware for fetching and generating a report on calorie consumption.
  *
  * @author Maor Bezalel
- * @author @todo Add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 import { CalorieConsumption } from '../models/index.js';

@@ -1,8 +1,8 @@
 /**
  * @fileoverview This file contains a wrapped middleware that is responsible for checking if a user exists in the database and responding accordingly.
- * @author @todo add your info Itzik (delete the todo after adding the info)
  *
  * @author Maor Bezalel
+ * @author Itzhak Yakubov
  */
 
 import { matchedData } from 'express-validator';

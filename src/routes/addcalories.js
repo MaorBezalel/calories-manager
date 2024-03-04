@@ -10,6 +10,7 @@ import { checkSchema } from 'express-validator';
 import { handleValidationErrorsMiddleware, checkIfUserExistsMiddleware } from '../middlewares/index.js';
 import { addNewCalorieConsumptionValidationSchema } from '../validation-schemas/index.js';
 import { CalorieConsumption } from '../models/index.js';
+import { generateUniqueId } from '../utils/generate_unique_id.js';
 
 const router = Router();
 
@@ -26,7 +27,7 @@ const router = Router();
  * @apiBody {String} description Description of the calorie consumption item.
  * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
  *
- * @apiSuccess (201) {Object} CaloriesAdded Calories added successfully for user with ID: {user_id}!
+ * @apiSuccess (201) {Object} The newly added calorie consumption item as a JSON object with generated ID.
  *
  * @apiError (400) {Object} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
  * @apiUse ErrorValidationExample
@@ -42,15 +43,18 @@ router.post(
         // get the validated data from the local object of the response object (attached by the `handleValidationErrorsMiddleware`)
         const data = res.locals.validatedData;
 
+        // generate a unique ID for the new calorie consumption item and attach it to the data
+        data.id = generateUniqueId();
+
         // create a new calorie consumption item
         const newCalorieConsumption = new CalorieConsumption(data);
 
         // save the new calorie consumption item to the database
         try {
             await newCalorieConsumption.save();
-            res.status(201).send({ message: `Calories added successfully for user with ID: ${data.user_id}!` });
+            res.status(201).json(data);
         } catch (error) {
-            res.status(500).send({
+            res.status(500).json({
                 message: `Error while trying to add calories for the user to the database: ${error.message}`,
             });
         }

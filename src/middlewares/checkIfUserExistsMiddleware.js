@@ -18,15 +18,15 @@ import { User } from '../models/index.js';
  */
 export const checkIfUserExistsMiddleware = (shouldExists) => async (req, res, next) => {
     // get the validated data from the request
-    const data = matchedData(req);
+    const data = res.locals.validatedData;
 
     // check if user_id exists in the users collection as `id`
     const userExists = !!(await User.findOne({ id: data.user_id }));
 
     if (shouldExists && !userExists) {
-        return res.status(404).send({ message: `User with id ${data.user_id} does not exist.` });
+        return res.status(404).json({ message: `User with id ${data.user_id} does not exist.` });
     } else if (!shouldExists && userExists) {
-        return res.status(409).send({ message: `User with id ${data.user_id} already exists.` });
+        return res.status(409).json({ message: `User with id ${data.user_id} already exists.` });
     } else {
         next();
     }

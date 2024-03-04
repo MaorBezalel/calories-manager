@@ -1,11 +1,11 @@
-import { loggingMiddleware } from './loggingMiddleware.js';
-import { handleValidationErrorsMiddleware } from './handleValidationErrorsMiddleware.js';
-import { checkIfUserExistsMiddleware } from './checkIfUserExistsMiddleware.js';
-import { fetchAndGenaerateReportMiddleware } from './fetchAndGenerateReportMiddleware.js';
+/**
+ * @fileoverview this file is used to export all the middlewares from one place
+ *
+ * @author Maor Bezalel
+ * @author Itzhak Yakubov
+ */
 
-export {
-    loggingMiddleware,
-    handleValidationErrorsMiddleware,
-    checkIfUserExistsMiddleware,
-    fetchAndGenaerateReportMiddleware,
-};
+export { logRequestDetails } from './log_request_details.js';
+export { handleValidationErrors } from './handle_validation_errors.js';
+export { checkIfUserExists } from './check_if_user_exists.js';
+export { fetchAndGenerateCalorieReport } from './fetch_and_generate_calorie_report.js';

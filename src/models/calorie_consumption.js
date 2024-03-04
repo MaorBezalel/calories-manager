@@ -2,7 +2,7 @@
  * @fileoverview This file contains the model for the calorie consumption item for the MongoDB database.
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 import mongoose from 'mongoose';
@@ -27,6 +27,12 @@ const calorieConsumptionSchema = new mongoose.Schema(
         day: {
             type: mongoose.Schema.Types.Number,
             required: true,
+        },
+
+        id: {
+            type: mongoose.Schema.Types.String,
+            required: true,
+            unqiue: true,
         },
 
         description: {

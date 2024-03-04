@@ -2,7 +2,7 @@
  * @fileoverview This file contains the schema for validating the request body when adding a new calorie consumption record (POST /addcalories).
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 /**
@@ -11,7 +11,7 @@
  *
  * @type {import('express-validator').Schema}
  */
-export const addNewCalorieConsumptionValidationSchema = {
+export const calorieConsumptionSchema = {
     user_id: {
         in: ['body'],
         notEmpty: {

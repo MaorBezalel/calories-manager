@@ -2,7 +2,7 @@
  * @fileoverview This file contains the main app that runs the server.
  *
  * @author Maor Bezalel
- * @author <firstname> <lastname> <id> @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 // import express for creating the server
@@ -15,13 +15,10 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 
 // import middlewares
-import { loggingMiddleware } from './middlewares/index.js';
+import { logRequestDetails } from './middlewares/index.js';
 
 // import routes (endpoints)
-import indexRouter from './routes/index.js';
-import aboutRouter from './routes/about.js';
-import addcaloriesRouter from './routes/addcalories.js';
-import reportRouter from './routes/report.js';
+import { homeRouter, aboutRouter, addcaloriesRouter, reportRouter } from './routes/index.js';
 
 // create an express app
 const app = express();
@@ -34,10 +31,10 @@ mongoose
 
 // use middlewares
 app.use(express.json()); // for parsing application/json
-app.use(loggingMiddleware);
+app.use(logRequestDetails);
 
 // use routes
-app.use(indexRouter);
+app.use(homeRouter);
 app.use(aboutRouter);
 app.use(addcaloriesRouter);
 app.use(reportRouter);

@@ -1,5 +1,7 @@
-import { User } from './User.js';
-import { CalorieConsumption } from './CalorieConsumption.js';
-import { Developer } from './Developer.js';
+/**
+ * @fileoverview This file is used to export all the models in one place.
+ */
 
-export { User, CalorieConsumption, Developer };
+export { User } from './user.js';
+export { CalorieConsumption } from './calorie_consumption.js';
+export { Developer } from './developer.js';

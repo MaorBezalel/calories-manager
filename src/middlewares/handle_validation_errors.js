@@ -2,6 +2,7 @@
  * @fileoverview This file contains a middleware that is responsible for sending json error responses when validation errors occur.
  *
  * @author Maor Bezalel
+ * @author Itzhak Yakubov
  */
 
 import { validationResult, matchedData } from 'express-validator';
@@ -18,7 +19,7 @@ import { validationResult, matchedData } from 'express-validator';
  * - The validated data is attached to `res.locals.validatedData`.
  * - This middleware should be used after the express-validator's [checkSchema](https://express-validator.github.io/docs/api/check-schema/#checkschema) middleware to be able to get the validation results from [validationResult](https://express-validator.github.io/docs/api/validation-result/#validationresult) and the validated data from [matchedData](https://express-validator.github.io/docs/api/matched-data/#matcheddata).
  */
-export const handleValidationErrorsMiddleware = (req, res, next) => {
+export const handleValidationErrors = (req, res, next) => {
     // get the validation errors from the request
     const errors = validationResult(req);
 

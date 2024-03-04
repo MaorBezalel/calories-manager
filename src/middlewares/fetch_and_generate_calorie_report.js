@@ -17,11 +17,11 @@ import { CalorieConsumption } from '../models/index.js';
  *
  * @remarks
  * - The report is attached to `res.locals.reportData`.
- * - This middleware should be used after `handleValidationErrorsMiddleware` to ensure that the request contains valid query parameters.
+ * - This middleware should be used after `handleValidationErrors` to ensure that the request contains valid query parameters.
  * to ensure that the request contains valid query parameters.
  */
-export const fetchAndGenaerateReportMiddleware = async (req, res, next) => {
-    // get the validated data from the locals object of the response object (attached by the `handleValidationErrorsMiddleware`)
+export const fetchAndGenerateCalorieReport = async (req, res, next) => {
+    // get the validated data from the locals object of the response object (attached by the `handleValidationErrors`)
     const data = res.locals.validatedData;
 
     // query the database for calorie consumption items matching the specified user, year, and month

@@ -2,17 +2,13 @@
  * @fileoverview This file contains the route for the endpoint /report.
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 import { Router } from 'express';
 import { checkSchema } from 'express-validator';
-import {
-    handleValidationErrorsMiddleware,
-    checkIfUserExistsMiddleware,
-    fetchAndGenaerateReportMiddleware,
-} from '../middlewares/index.js';
-import { getReportOnCalorieConsumptionValidationScheme } from '../validation-schemas/index.js';
+import { handleValidationErrors, checkIfUserExists, fetchAndGenerateCalorieReport } from '../middlewares/index.js';
+import { calorieReportSchema } from '../utils/validation/index.js';
 
 const router = Router();
 
@@ -36,15 +32,12 @@ const router = Router();
  */
 router.get(
     '/report',
-    checkSchema(getReportOnCalorieConsumptionValidationScheme),
-    handleValidationErrorsMiddleware,
-    checkIfUserExistsMiddleware(true),
-    fetchAndGenaerateReportMiddleware,
+    checkSchema(calorieReportSchema),
+    handleValidationErrors,
+    checkIfUserExists(true),
+    fetchAndGenerateCalorieReport,
     async (req, res) => {
-        // get the validated data from the locals object of the response object (attached by the `handleValidationErrorsMiddleware`)
-        const data = res.locals.validatedData;
-
-        // get the report from the locals object of the response object (attached by the `fetchAndGenaerateReportMiddleware`)
+        // get the report from the locals object of the response object (attached by the `fetchAndGenerateCalorieReport`)
         const report = res.locals.reportData;
 
         // return to the client the report as a JSON response

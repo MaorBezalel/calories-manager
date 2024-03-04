@@ -1,17 +1,17 @@
 /**
- * @fileoverview This file contains the validation schema for the endpoint /report.
+ * @fileoverview This file contains the schema for validating the request query parameters when getting a report on calorie consumption (GET /report).
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 /**
- * Scheam for validating the request query parameters when getting a report on calorie consumption (GET /report).
+ * Schema for validating the request query parameters when getting a report on calorie consumption (GET /report).
  * It is passed to the `checkSchema` middleware from the `express-validator` package.
  *
  * @type {import('express-validator').Schema}
  */
-export const getReportOnCalorieConsumptionValidationScheme = {
+export const calorieReportSchema = {
     user_id: {
         in: ['query'],
         notEmpty: {

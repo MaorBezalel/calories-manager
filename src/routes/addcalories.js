@@ -2,15 +2,15 @@
  * @fileoverview This file contains the route for the endpoint /addcalories.
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 import { Router } from 'express';
 import { checkSchema } from 'express-validator';
-import { handleValidationErrorsMiddleware, checkIfUserExistsMiddleware } from '../middlewares/index.js';
-import { addNewCalorieConsumptionValidationSchema } from '../validation-schemas/index.js';
+import { handleValidationErrors, checkIfUserExists } from '../middlewares/index.js';
+import { calorieConsumptionSchema } from '../utils/validation/index.js';
 import { CalorieConsumption } from '../models/index.js';
-import { generateUniqueId } from '../utils/generate_unique_id.js';
+import { generateUniqueId } from '../utils/helpers/index.js';
 
 const router = Router();
 
@@ -27,7 +27,7 @@ const router = Router();
  * @apiBody {String} description Description of the calorie consumption item.
  * @apiBody {String} category Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
  *
- * @apiSuccess (201) {Object} The newly added calorie consumption item as a JSON object with generated ID.
+ * @apiSuccess (201) {Object} CalorieConsumption The newly added calorie consumption item as a JSON object with generated ID.
  *
  * @apiError (400) {Object} ValidationErrors An array of errors that occurred during the validation of the request parameters (body, query, or path params).
  * @apiUse ErrorValidationExample
@@ -36,11 +36,11 @@ const router = Router();
  */
 router.post(
     '/addcalories',
-    checkSchema(addNewCalorieConsumptionValidationSchema),
-    handleValidationErrorsMiddleware,
-    checkIfUserExistsMiddleware(true),
+    checkSchema(calorieConsumptionSchema),
+    handleValidationErrors,
+    checkIfUserExists(true),
     async (req, res) => {
-        // get the validated data from the local object of the response object (attached by the `handleValidationErrorsMiddleware`)
+        // get the validated data from the local object of the response object (attached by the `handleValidationErrors`)
         const data = res.locals.validatedData;
 
         // generate a unique ID for the new calorie consumption item and attach it to the data

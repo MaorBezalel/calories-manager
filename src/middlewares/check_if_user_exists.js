@@ -14,9 +14,9 @@ import { User } from '../models/index.js';
  * @param {Boolean} shouldExists - A flag that indicates if the user should exist or not. If true, the middleware will respond with an error if the user does not exist. If false, the middleware will respond with an error if the user does exist.
  * @return {import('express').RequestHandler} A middleware that checks if a user exists in the database and responds accordingly based on the value of `shouldExists`.
  *
- * @remarks This middleware should be used after `handleValidationErrorsMiddleware` to ensure that the request contains valid query parameters.
+ * @remarks This middleware should be used after `handleValidationErrors` to ensure that the request contains valid query parameters.
  */
-export const checkIfUserExistsMiddleware = (shouldExists) => async (req, res, next) => {
+export const checkIfUserExists = (shouldExists) => async (req, res, next) => {
     // get the validated data from the request
     const data = res.locals.validatedData;
 

@@ -1,5 +1,8 @@
 /**
- * @fileoverview This file is used to export all the models in one place.
+ * @fileoverview This file is used to export all the mongoose models in one place.
+ *
+ * @author Maor Bezalel
+ * @author Itzhak Yakubov
  */
 
 export { User } from './user.js';

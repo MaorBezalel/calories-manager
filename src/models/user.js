@@ -2,7 +2,7 @@
  * @fileoverview This file contains the model for the user item for the MongoDB database.
  *
  * @author Maor Bezalel
- * @author @todo add your info Itzik (delete the todo after adding the info)
+ * @author Itzhak Yakubov
  */
 
 import mongoose from 'mongoose';

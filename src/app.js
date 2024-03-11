@@ -38,6 +38,7 @@ app.use(homeRouter);
 app.use(aboutRouter);
 app.use(addcaloriesRouter);
 app.use(reportRouter);
+app.use(express.static('public')); // serve the public folder as static files
 app.use('/docs', express.static('docs')); // serve the docs folder as static files
 
 // view engine setup

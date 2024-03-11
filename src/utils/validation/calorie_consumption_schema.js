@@ -26,7 +26,10 @@ export const calorieConsumptionSchema = {
     year: {
         in: ['body'],
         notEmpty: { errorMessage: 'year parameter is required' },
-        isInt: { errorMessage: 'year parameter must be an integer' },
+        isInt: {
+            options: { gt: 0 },
+            errorMessage: 'year parameter must be a positive integer (1 or more)',
+        },
         toInt: true,
     },
 

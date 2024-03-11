@@ -1,5 +1,5 @@
 /**
- * @fileoverview This file contains the model for the Developer entity.
+ * @fileoverview This file contains the model for the developer entity for the MongoDB database.
  *
  * @author Maor Bezalel
  * @author Itzhak Yakubov

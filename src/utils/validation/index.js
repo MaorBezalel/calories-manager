@@ -1,5 +1,5 @@
 /**
- * This file is used to export all the validation schemas in one place.
+ * @fileoverview This file is used to export all the validation schemas in one place.
  *
  * @author Maor Bezalel
  * @author Itzhak Yakubov

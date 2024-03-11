@@ -1,4 +1,6 @@
-//- @fileoverview This file contain the pug code for the home page of the Calories Manager App. It provides a brief overview of the API and its endpoints.
+
+//- @fileoverview This file contain the pug code for the home page of the Calories Manager App. 
+//-               It provides a brief overview of the API and its endpoints.
 //-
 //- @author Maor Bezalel
 //- @author Itzhak Yakubov
@@ -6,18 +8,21 @@
 extends layout
 
 block content
-    h1(style="font-size: 2em; font-weight: bold; text-align: center; margin-bottom: 20px;") Welcome to the Calories Manager App!
-    p(style="text-align: center; margin-bottom: 20px;") A simple API to help you track your calorie consumption and generate reports.
+    hgroup
+        h1 Welcome to the Calories Manager App!
+        p(style="text-align: center; margin-bottom: 20px;")
+            | A simple API to help you track your calorie consumption and 
+            | generate reports.
 
     div(style="padding-left: 5rem; padding-right: 5rem;")
         h2 Routes:
         ul(style="list-style-type: disc; margin-left: 20px; margin-bottom: 20px;")
             li
-                h3(style="margin-bottom: 10px;") /addcalories/
+                h3 /addcalories/
                 p Method: POST
                 p Description: This endpoint is used to add a new calorie consumption item.
                 p Request Body Parameters:
-                ul(style="list-style-type: circle; margin-left: 20px; margin-bottom: 10px;")
+                ul
                     li user_id: The ID of the user for whom the calorie consumption item is being added.
                     li year: The year when the calorie consumption item occurred.
                     li month: The month when the calorie consumption item occurred.
@@ -25,27 +30,39 @@ block content
                     li description: Description of the calorie consumption item.
                     li category: Category of the calorie consumption item (e.g., breakfast, lunch, dinner, other).
                     li amount: Amount of calories consumed.
-                p Functionality: The endpoint receive the parameters mentioned above and add a new calorie consumption item to the MongoDB database. The ID of the item will be generated on the server side.
+                p
+                    | Functionality: The endpoint receive the parameters mentioned above and add a new calorie 
+                    | consumption item to the MongoDB database. The ID of the item will be generated on the 
+                    | server side.
 
             li
-                h3(style="margin-bottom: 10px;") /report/
+                h3 /report/
                 p Method: GET
-                p Description: This endpoint is used to retrieve a detailed report of calorie consumption for a specific month and year.
+                p
+                    | Description: This endpoint is used to retrieve a detailed report of calorie 
+                    | consumption for a specific month and year.
                 p Query Parameters:
-                ul(style="list-style-type: circle; margin-left: 20px; margin-bottom: 10px;")
+                ul
                     li user_id: The ID of the user for whom the report is being requested.
                     li year: The year for which the report is being requested.
                     li month: The month for which the report is being requested.
-                p Functionality: The endpoint query the MongoDB database for calorie consumption items matching the specified user, year, and month. It should then generate a JSON response containing a detailed report of calorie consumption for different categories (breakfast, lunch, dinner, other) for the specified month and year.
+                p
+                    | Functionality: The endpoint query the MongoDB database for calorie consumption items 
+                    | matching the specified user, year, and month. It should then generate a JSON response 
+                    | containing a detailed report of calorie consumption for different categories 
+                    | (breakfast, lunch, dinner, other) for the specified month and year.
 
             li
-                h3(style="margin-bottom: 10px;") /about/
+                h3 /about/
                 p Method: GET
                 p Description: This endpoint is used to retrieve information about the developers.
-                p Functionality: The endpoint return a JSON array containing objects describing each developer involved in the project. Each object should include details such as first name, last name, ID, and email address of the developers.
+                p
+                    | Functionality: The endpoint return a JSON array containing objects describing each 
+                    | developer involved in the project. Each object should include details such as first 
+                    | name, last name, ID, and email address of the developers.
 
             li
-                h3(style="margin-bottom: 10px;") /docs/
+                h3 /docs/
                 p Method: GET
                 p Description: This endpoint is used to retrieve the API documentation.
                 p Functionality: The endpoint return a static HTML page containing the API documentation.

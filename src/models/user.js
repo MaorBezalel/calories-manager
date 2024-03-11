@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
             required: true,
         },
         birthday: {
-            type: mongoose.Schema.Types.String, // String accodring to the project requirements
+            type: mongoose.Schema.Types.String,
             required: true,
         },
     },

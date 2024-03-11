@@ -1,13 +1,15 @@
 /**
- * @fileoverview This file contains the schema for validating the request query parameters when getting a report on calorie consumption (GET /report).
+ * @fileoverview This file contains the schema for validating the request query
+ *               parameters when getting a report on calorie consumption (GET /report).
  *
  * @author Maor Bezalel
  * @author Itzhak Yakubov
  */
 
 /**
- * Schema for validating the request query parameters when getting a report on calorie consumption (GET /report).
- * It is passed to the `checkSchema` middleware from the `express-validator` package.
+ * Schema for validating the request query parameters when getting a report
+ * on calorie consumption (GET /report). It is passed to the `checkSchema`
+ * middleware from the `express-validator` package.
  *
  * @type {import('express-validator').Schema}
  */

@@ -19,7 +19,7 @@ export const createApp = () => {
     app.use(aboutRouter);
     app.use(addcaloriesRouter);
     app.use(reportRouter);
-    app.use('/docs', express.static('docs')); // serve the docs folder as static files
+    app.use(express.static('public'));
 
     // view engine setup
     app.set('view engine', 'pug');
